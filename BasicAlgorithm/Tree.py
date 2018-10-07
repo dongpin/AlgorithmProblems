@@ -1,6 +1,8 @@
 # Node for binary tree
 #
 
+from collections import namedtuple
+
 class TreeNode:
     def __init__(self, data):
         self.data = data
@@ -22,7 +24,22 @@ class BinaryTree:
         return helper(self.root)
 
     def is_balanced(self):
-        pass
+        BalancedStatusWithHeight = namedtuple('BalancedStatusWithHeight', ('balanced', 'height'))
+
+        def check_balanced(tree):
+            if not tree:
+                return BalancedStatusWithHeight(True, -1)
+            left_result = check_balanced(tree.left)
+            if not left_result.balanced:
+                return BalancedStatusWithHeight(False, 0)
+            right_result = check_balanced(tree.right)
+            if not right_result.balanced:
+                return BalancedStatusWithHeight(False, 0)
+            
+            is_balanced = abs(left_result.height - right_result.height) <= 1
+            height = max(left_result.height, right_result.height) + 1
+            return BalancedStatusWithHeight(is_balanced, height)
+        return check_balanced(self.root).balanced
     
     def is_symmetric(self, tree):
         pass
