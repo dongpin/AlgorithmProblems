@@ -1,6 +1,6 @@
 import unittest
 
-from BasicAlgorithm import String
+from Python.BasicAlgorithm import String
 
 def test_is_palindrome():
     assert String.is_palindromic('aba') == True

@@ -1,7 +1,7 @@
 import unittest
 
-from BasicAlgorithm.Tree import TreeNode
-from BasicAlgorithm.Tree import BinaryTree
+from Python.BasicAlgorithm.Tree import TreeNode
+from Python.BasicAlgorithm.Tree import BinaryTree
 
 
 
