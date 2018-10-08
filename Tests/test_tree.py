@@ -3,8 +3,6 @@ import unittest
 from Python.BasicAlgorithm.Tree import TreeNode
 from Python.BasicAlgorithm.Tree import BinaryTree
 
-
-
 def test_height():
     tree = BinaryTree()
     tree.root = None
