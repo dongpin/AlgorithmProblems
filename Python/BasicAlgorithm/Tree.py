@@ -22,6 +22,54 @@ class BinaryTree:
                 return 0
             return max(helper(node.left), helper(node.right)) + 1
         return helper(self.root)
+    
+    def preorder(self):
+        res = []
+        def preorder_helper(node):
+            if node:
+                res.append(node.data)
+                preorder_helper(node.left)
+                preorder_helper(node.right)
+        preorder_helper(self.root)
+        return res
+    
+    def inorder(self):
+        res = []
+        def inorder_helper(node):
+            if node:
+                inorder_helper(node.left)
+                res.append(node.data)
+                inorder_helper(node.right)
+        inorder_helper(self.root)
+        return res
+    
+    def postorder(self):
+        res = []
+        def postorder_helper(node):
+            if node:
+                postorder_helper(node.left)
+                postorder_helper(node.right)
+                res.append(node.data)
+        postorder_helper(self.root)
+        return res
+    
+    def bfs(self):
+        pass
+    
+    def dfs_iterative(self):
+        pass
+    
+    def morris(self):
+        pass
+    
+    def level_order_traverse(self):
+        pass
+    
+    def serialize(self):
+        pass
+    
+    def deserialize(self):
+        pass
 
     def is_balanced(self):
         BalancedStatusWithHeight = namedtuple('BalancedStatusWithHeight', ('balanced', 'height'))
@@ -43,8 +91,18 @@ class BinaryTree:
     
     def is_symmetric(self, tree):
         pass
+
+    def is_bst(self):
+        pass
     
 class BinarySearchTree(BinaryTree):
     def __init__(self):
         pass
     
+    def delete(self, data):
+        pass
+    
+    def insert(self, data):
+        pass
+
+# class BalancedSearchTree: # 2-3 search trees, red-black BSTs
