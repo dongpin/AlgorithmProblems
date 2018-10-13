@@ -24,12 +24,48 @@ class Sorting:
 
     def shell_sort(self, arr):
         pass
+    
+    def _merge(self, left, right):
+        if not left or len(left) == 0:
+            return right
+        if not right or len(right) == 0:
+            return left
+        i, j = 0, 0
+        res = []
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                res.append(left[i])
+                i += 1
+            else:
+                res.append(right[j])
+                j += 1
+        while i < len(left):
+            res.append(left[i])
+            i += 1
+        while j < len(right):
+            res.append(right[j])
+            j += 1
+        return res
 
     def merge_sort(self, arr):
-        pass
+        if not arr or len(arr) == 0:
+            return []
+        elif len(arr) < 2:
+            return arr
+        else:
+            m = len(arr) // 2
+            left = self.merge_sort(arr[:m])
+            right = self.merge_sort(arr[m:])
+            return self._merge(left, right)
     
     def quick_sort(self, arr):
-        pass
+        if not arr or len(arr) == 0:
+            return []
+        else:
+            p = arr[0]
+            lesser = self.quick_sort([x for x in arr[1:] if x <= p])
+            greater = self.quick_sort([x for x in arr[1:] if x > p])
+            return lesser + [p] + greater
     
     def _heapify(self, arr, n, i):
         largest = i
