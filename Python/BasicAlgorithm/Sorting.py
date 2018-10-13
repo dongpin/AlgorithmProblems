@@ -50,7 +50,7 @@ class Sorting:
     def merge_sort(self, arr):
         if not arr or len(arr) == 0:
             return []
-        elif len(arr) < 2:
+        elif len(arr) == 1:
             return arr
         else:
             m = len(arr) // 2
