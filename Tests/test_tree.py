@@ -1,7 +1,6 @@
 import unittest
 
-from Python.BasicAlgorithm.Tree import TreeNode
-from Python.BasicAlgorithm.Tree import BinaryTree
+from Python.BasicAlgorithm.Tree import *
 
 # Test Helpers
 def create_sample_tree():
@@ -57,3 +56,11 @@ def test_inorder_traverse():
 def test_postorder_traverse():
     tree = create_sample_tree()
     assert tree.postorder() == [6, 4, 2, 5, 3, 1]
+
+def test_segment_tree():
+    tree = SegmentTree([0, 2, 3, 4, 5])
+    assert tree.query(1, 3) == 9
+    tree.update(1, 2)
+    assert tree.query(1, 3) == 11
+    assert tree.query(0, 0) == 0
+    assert tree.query(-1, -1) == 0

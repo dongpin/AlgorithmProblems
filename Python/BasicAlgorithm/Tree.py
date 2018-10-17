@@ -58,6 +58,9 @@ class BinaryTree:
     
     def dfs_iterative(self):
         pass
+
+    def iddfs(self):
+        pass
     
     def morris(self):
         pass
@@ -106,3 +109,59 @@ class BinarySearchTree(BinaryTree):
         pass
 
 # class BalancedSearchTree: # 2-3 search trees, red-black BSTs
+
+class SegementTreeNode:
+    def __init__(self, start, end, value):
+        self.start = start
+        self.end = end
+        self.val = value
+        self.left = None
+        self.right = None
+
+class SegmentTree:
+    def __init__(self, arr):
+        self.arr = arr
+        self.root = self.build_tree(0, len(self.arr)-1)
+
+    def build_tree(self, l, r):
+        if l == r:
+            return SegementTreeNode(l, r, self.arr[l])
+        mid = l + (r - l) // 2
+        left = self.build_tree(l, mid)
+        right = self.build_tree(mid+1, r)
+        root = SegementTreeNode(l, r, left.val + right.val)
+        root.left, root.right = left, right
+        return root
+
+    def _query(self, node, start, end):
+        mid = node.start + (node.end - node.start) // 2
+        if start <= node.start and node.end <= end:
+            return node.val
+        elif end <= mid:
+            return self._query(node.left, start, end)
+        elif start > mid:
+            return self._query(node.right, start, end)
+        elif start <= mid and mid < end:
+            return self._query(node.left, start, mid) + self._query(node.right, mid+1, end)
+        return 0
+
+    def query(self, start, end):
+        if start < 0 or end > len(self.arr) - 1:
+            return 0
+        return self._query(self.root, start, end)
+
+    def _update(self, i, diff, node):
+        if i < node.start or i > node.end:
+           return
+        node.val += diff
+        if node.start == node.end == i:
+            return
+        self._update(i, diff, node.left)
+        self._update(i, diff, node.right)
+
+    def update(self, i, diff):
+        self._update(i, diff, self.root)
+
+
+# Fenwick Tree and Binary Indexed Tree
+
