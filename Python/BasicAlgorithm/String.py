@@ -25,6 +25,14 @@ def rabin_karp():
     pass
 
 # regular expressions
+def is_match(text, pattern):
+    if not pattern:
+        return not text
+    first_match = bool(text) and pattern[0] in {text[0], '.'}
+    if len(pattern) >= 2 and pattern[1] == '*':
+        return is_match(text, pattern[2:]) or first_match and is_match(text[1:], pattern)
+    else:
+        return first_match and is_match(text[1:], pattern[1:])
 
 # data compression
 
@@ -39,11 +47,31 @@ def longest_common_subsequence(xstr, ystr):
         return max(longest_common_subsequence(xstr, ys), longest_common_subsequence(xs, ystr), key=len)
 
 def longest_common_subsequence_iterative(xstr, ystr):
-    pass
+    # Memorization or tabulation
+    # This is tabulation approach 
+    xlen, ylen = len(xstr), len(ystr)
+    tab = [[None for _ in range(ylen+1)] for _ in range(xlen+1)]
+    for i in range(xlen+1):
+        for j in range(ylen+1):
+            if i == 0 or j == 0:
+                tab[i][j] = ''
+            elif xstr[i-1] == ystr[j-1]:
+                tab[i][j] = tab[i-1][j-1] + xstr[i-1]
+            else:
+                tab[i][j] = max(tab[i-1][j], tab[i][j-1], key=len)
+    return tab[xlen][ylen]
 
 # Longest increasing subsequence
-def longest_increasing_subsequence():
-    pass
+def longest_increasing_subsequence(arr):
+    if not arr:
+        return 0
+    if len(arr) == 1:
+        return arr
+    res = longest_increasing_subsequence(arr[:-1])
+    if arr[-1] > res[-1]:
+        return res + [arr[-1]]
+    else:
+        return res
 
 # Longest palindrome subsequence
 def longest_palindrome_subsequence():
@@ -55,6 +83,9 @@ def longest_alternating_subsequence():
 
 # Longest common substring
 def longest_common_substring(xstr, ystr):
+    pass
+
+def longest_common_substring_iterative(xstr, ystr):
     lcs_res = [[0 for _ in range(len(ystr)+1)] for _ in range(len(xstr)+1)]
 
     result = 0
@@ -77,6 +108,17 @@ def longest_palindrome_substring():
 def longest_repeated_substring():
     pass
 
-    
-
+# Edit distance
+def edit_distance(str1, str2):
+    def edit_distance_helper(str1, str2, x, y):
+        if x == 0:
+            return y
+        if y == 0:
+            return x
+        if str1[x-1] == str2[y-1]:
+            return edit_distance_helper(str1, str2, x-1, y-1)
+        return 1 + min(edit_distance_helper(str1, str2, x, y-1), \
+                        edit_distance_helper(str1, str2, x-1, y), \
+                        edit_distance_helper(str1, str2, x-1, y-1))
+    return edit_distance_helper(str1, str2, len(str1), len(str2))
 

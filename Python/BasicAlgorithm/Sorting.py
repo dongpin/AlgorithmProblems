@@ -25,6 +25,15 @@ class Sorting:
     def shell_sort(self, arr):
         pass
     
+    def counting_sort(self, arr):
+        pass
+
+    def radix_sort(self, arr):
+        pass
+
+    def bucket_sort(self, arr):
+        pass
+    
     def _merge(self, left, right):
         if not left or len(left) == 0:
             return right

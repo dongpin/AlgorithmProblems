@@ -8,15 +8,26 @@ def test_is_palindrome():
     assert String.is_palindromic('ab') == False
     assert String.is_palindromic('') == True
 
+lcsubsequence_test_cases = [(('a', 'a'), 'a'), (('ab', 'acbd'), 'ab'), \
+                    (('abcd', 'ac'), 'ac'), (('abcdefghijk', 'caegijk'), 'aegijk'), \
+                    (('a', ''), ''), (('', ''), '')]
 def test_longest_common_subsequence():
-    assert String.longest_common_subsequence('a', 'a') == 'a'
-    assert String.longest_common_subsequence('ab', 'acbd') == 'ab'
-    assert String.longest_common_subsequence('abcd', 'ac') == 'ac'
-    assert String.longest_common_subsequence('abcdefghijk', 'caegijk') == 'aegijk'
-    assert String.longest_common_subsequence('a', '') == ''
-    assert String.longest_common_subsequence('', '') == ''
+    for t in lcsubsequence_test_cases:
+        assert String.longest_common_subsequence(t[0][0], t[0][1]) == t[1]
 
-def test_longest_common_substring():
-    assert String.longest_common_substring('OldSite:GeeksforGeeks.org', 'NewSite:GeeksQuiz.com') == 10
-    assert String.longest_common_substring('abc', 'cba') == 1
-    assert String.longest_common_substring('', '') == 0
+def test_longest_common_subsequence_iterative():
+    for t in lcsubsequence_test_cases:
+        assert String.longest_common_subsequence_iterative(t[0][0], t[0][1]) == t[1]
+
+lcsubstring_test_cases = [(('OldSite:GeeksforGeeks.org', 'NewSite:GeeksQuiz.com'), 10), \
+                            (('abc', 'cba'), 1), (('abcd', 'efgh'), 0), (('', ''), 0), \
+                            (('abcde', 'ace'), 1)]
+def test_longest_common_substring_iterative():
+    for t in lcsubstring_test_cases:
+        assert String.longest_common_substring_iterative(t[0][0], t[0][1]) == t[1]
+
+edit_distance_test_cases = [('a', '', 1), ('abc', 'abc', 0), ('abc', 'cde', 3), \
+                            ('', '', 0)]
+def test_edit_distance():
+    for t in edit_distance_test_cases:
+        assert String.edit_distance(t[0], t[1]) == t[2]    
