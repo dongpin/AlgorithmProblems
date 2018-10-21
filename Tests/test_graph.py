@@ -39,3 +39,14 @@ def test_bfs():
     assert bfs(test_graph2) == ['A', 'B', 'C']
     assert bfs(test_graph3) == ['A', 'B', 'C']
     assert bfs(test_graph4) == []
+
+test_graph5 = {'A': ['C'], \
+              'B': ['C', 'D'], \
+              'C': ['E'], \
+              'D': ['F'], \
+              'E': ['H', 'F'], \
+              'F': ['G'], \
+              'G': [], \
+              'H': []}
+def test_topological_sort():
+    assert topological_sort(test_graph5) == ['B', 'D', 'A', 'C', 'E', 'F', 'G', 'H']

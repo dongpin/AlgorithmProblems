@@ -66,6 +66,23 @@ def bfs(graph):
                             stack.append(v)
     return res
 
+# Topological sort
+def topological_sort(graph):
+    def topo_helper(graph, u, visited, res):
+        visited.add(u)
+        for v in graph[u]:
+            if v not in visited:
+                topo_helper(graph, v, visited, res)
+        res.insert(0, u)
+
+    visited = set()
+    res = []
+    for u in graph:
+        if u not in visited:
+            topo_helper(graph, u, visited, res)
+    return res
+
+
 # Directed graph: Detect cycle, Topological sort, SCC, Kosaraju-Sharir algorithm
 
 # MST: Prim's algorithm, Kruskal's algorithm
