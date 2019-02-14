@@ -102,13 +102,48 @@ class BinarySearchTree(BinaryTree):
     def __init__(self):
         pass
     
-    def delete(self, data):
-        pass
+    def search(self, key):
+        def search_helper(node, key):
+            if not node or key == node.data:
+                return node
+            if key < node.data:
+                return search_helper(node.left, key)
+            else:
+                return search_helper(node.right, key)
+        return search_helper(self.root, key)
     
     def insert(self, data):
-        pass
+        def insert_helper(root, node):
+            if root is None:
+                root = node
+            elif node.data <= root.data:
+                if root.left is None:
+                    root.left = node
+                else:
+                    insert_helper(root.left, node)
+            else:
+                if root.right is None:
+                    root.right = node
+                else:
+                    insert_helper(root.right, node)
+        node = TreeNode(data)
+        insert_helper(self.root, node)
 
-# class BalancedSearchTree: # 2-3 search trees, red-black BSTs
+    def delete(self, key):
+        pass
+            
+class SelfBalancingBST:
+    pass
+class RBTree(SelfBalancingBST):
+    pass
+class AVLTree(SelfBalancingBST):
+    pass
+class SplayTree(SelfBalancingBST):
+    pass
+
+# 2-3 search trees
+
+# Finger Tree https://zhuanlan.zhihu.com/p/30589105
 
 class SegementTreeNode:
     def __init__(self, start, end, value):

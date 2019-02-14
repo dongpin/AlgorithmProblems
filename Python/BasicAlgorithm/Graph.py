@@ -30,13 +30,13 @@ def dfs(graph):
 
 def dfs_iterative(graph):
     visited = set()
-    queue = []
+    stack = []
     res = []
     for u in graph:
         if u not in visited:
-            queue.append(u)
-            while queue:
-                cur = queue.pop()
+            stack.append(u)
+            while stack:
+                cur = stack.pop()
                 if cur not in visited:
                     visited.add(cur)
                     res.append(cur)
@@ -45,25 +45,25 @@ def dfs_iterative(graph):
                     # to maintain the same sequence as recursive approach
                     for v in graph[cur][::-1]:
                         if v not in visited:
-                            queue.append(v)
+                            stack.append(v)
     return res
 
 def bfs(graph):
     visited = set()
-    stack = []
+    queue = []
     res = []
     for u in graph:
         if u not in visited:
-            stack.append(u)
-            while stack:
-                cur = stack.pop(0)
+            queue.append(u)
+            while queue:
+                cur = queue.pop(0)
                 if cur not in visited:
                     visited.add(cur)
                     res.append(cur)
                 if cur in graph:
                     for v in graph[cur]:
                         if v not in visited:
-                            stack.append(v)
+                            queue.append(v)
     return res
 
 # Directed graph: Detect cycle, Topological sort, SCC, Kosaraju-Sharir algorithm
