@@ -1,6 +1,7 @@
 import unittest
 
 from Python.BasicAlgorithm.Tree import *
+from Python.BasicAlgorithm.TreeTraversal import Traversal
 
 # Test Helpers
 def create_sample_tree():
@@ -45,17 +46,20 @@ def test_is_balanced():
 
 def test_preorder_traverse():
     tree = create_sample_tree()
-    assert tree.preorder() == [1, 2, 4, 6, 3, 5]
-    tree = BinaryTree()
-    assert tree.preorder() == []
+    traversal = Traversal(tree.root)
+    assert traversal.preorder() == [1, 2, 4, 6, 3, 5]
+    traversal = Traversal(None)
+    assert traversal.preorder() == []
 
 def test_inorder_traverse():
     tree = create_sample_tree()
-    assert tree.inorder() == [6, 4, 2, 1, 5, 3]
+    traversal = Traversal(tree.root)
+    assert traversal.inorder() == [6, 4, 2, 1, 5, 3]
 
 def test_postorder_traverse():
     tree = create_sample_tree()
-    assert tree.postorder() == [6, 4, 2, 5, 3, 1]
+    traversal = Traversal(tree.root)
+    assert traversal.postorder() == [6, 4, 2, 5, 3, 1]
 
 def test_segment_tree():
     tree = SegmentTree([0, 2, 3, 4, 5])
