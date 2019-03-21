@@ -1,5 +1,6 @@
-# Node for binary tree
-#
+"""
+    Tree
+"""
 
 from collections import namedtuple
 
@@ -12,105 +13,120 @@ class TreeNode:
     def __str__(self):
         return str(self.data)
 
+# Binary Tree
 class BinaryTree:
-    def __init__(self):
-        self.root = None
+    def __init__(self, root=None):
+        self.root = root
     
+    # Height of root node is number of edges from bottom
+    # Depth of root node is 0
     def height(self):
-        def helper(node):
+        def height_helper(node):
             if not node:
                 return 0
-            return max(helper(node.left), helper(node.right)) + 1
-        return helper(self.root)
-    
-    def preorder(self):
-        res = []
-        def preorder_helper(node):
-            if node:
-                res.append(node.data)
-                preorder_helper(node.left)
-                preorder_helper(node.right)
-        preorder_helper(self.root)
-        return res
-    
-    def inorder(self):
-        res = []
-        def inorder_helper(node):
-            if node:
-                inorder_helper(node.left)
-                res.append(node.data)
-                inorder_helper(node.right)
-        inorder_helper(self.root)
-        return res
-    
-    def postorder(self):
-        res = []
-        def postorder_helper(node):
-            if node:
-                postorder_helper(node.left)
-                postorder_helper(node.right)
-                res.append(node.data)
-        postorder_helper(self.root)
-        return res
-    
-    def bfs(self):
-        pass
-    
-    def dfs_iterative(self):
-        pass
+            return max(height_helper(node.left), height_helper(node.right)) + 1
+        return height_helper(self.root)
 
-    def iddfs(self):
-        pass
+    def height_iterative(self):
+        if not self.root:
+            return 0
+        queue = [self.root]
+        height = 0
+        while queue:
+            size = len(queue)
+            while size:
+                size -= 1
+                current = queue.pop(0)
+                if current.left:
+                    queue.append(current.left)
+                if current.right:
+                    queue.append(current.right)
+            height += 1
+        return height 
     
-    def morris(self):
-        pass
+    # Approach 1: recursively check if comply with bst property 
+    # Approach 2: inorder traversal
+    def is_bst(self):
+        def is_bst_helper(node, low, high):
+            if not node:
+                return True
+            if node.data < low or node.data > high:
+                return False
+            return is_bst_helper(node.left, low, node.data) \
+                and is_bst_helper(node.right, node.data, high)
+        return is_bst_helper(self.root, float('-inf'), float('inf'))
     
-    def level_order_traverse(self):
-        pass
+    def is_bst_inorder(self):
+        prev = None
+        def inorder(node):
+            if node:
+                if inorder(node.left) == False:
+                    return False
+                if not prev and node.data < prev:
+                    return False
+                prev = node.data
+                if inorder(node.right) == False:
+                    return False
+            return True
+        return inorder(self.root)
     
-    def serialize(self):
-        pass
-    
-    def deserialize(self):
-        pass
-
     def is_balanced(self):
         BalancedStatusWithHeight = namedtuple('BalancedStatusWithHeight', ('balanced', 'height'))
 
         def check_balanced(tree):
             if not tree:
                 return BalancedStatusWithHeight(True, -1)
-            left_result = check_balanced(tree.left)
-            if not left_result.balanced:
+            left = check_balanced(tree.left)
+            if not left.balanced:
                 return BalancedStatusWithHeight(False, 0)
-            right_result = check_balanced(tree.right)
-            if not right_result.balanced:
+            right = check_balanced(tree.right)
+            if not right.balanced:
                 return BalancedStatusWithHeight(False, 0)
             
-            is_balanced = abs(left_result.height - right_result.height) <= 1
-            height = max(left_result.height, right_result.height) + 1
+            is_balanced = abs(left.height - right.height) <= 1
+            height = max(left.height, right.height) + 1
             return BalancedStatusWithHeight(is_balanced, height)
         return check_balanced(self.root).balanced
     
-    def is_symmetric(self, tree):
-        pass
+    def is_symmetric(self):
+        def check_symmetric(tree1, tree2):
+            if not tree1 and not tree2:
+                return True
+            if tree1 and tree2 and tree1.data == tree2.data:
+                return check_symmetric(tree1.left, tree2.left) \
+                    and check_symmetric(tree1.right, tree2.right)
+            return False
+        if not self.root:
+            return True
+        return check_symmetric(self.root.left, self.root.right)
 
-    def is_bst(self):
-        pass
-    
+# Binary Search Tree
 class BinarySearchTree(BinaryTree):
     def __init__(self):
         pass
     
     def search(self, key):
         def search_helper(node, key):
-            if not node or key == node.data:
+            if not node:
+                return None 
+            if key == node.data:
                 return node
-            if key < node.data:
+            elif key < node.data:
                 return search_helper(node.left, key)
             else:
                 return search_helper(node.right, key)
         return search_helper(self.root, key)
+    
+    def search_iterative(self, key):
+        node = self.root
+        while node:
+            if node.data == key:
+                return node
+            if node.data < key:
+                node = node.right
+            elif node.data > key:
+                node = node.left
+        return None
     
     def insert(self, data):
         def insert_helper(root, node):
@@ -130,21 +146,77 @@ class BinarySearchTree(BinaryTree):
         insert_helper(self.root, node)
 
     def delete(self, key):
+        def delete_helper(root, node):
+            if not root:
+                return None
+            if key < root.data:
+                root.left = delete_helper(root.left, key)
+            elif key > root.data:
+                root.right = delete_helper(root.right, key)
+            else:
+                # only one child or no child
+                if not root.left:
+                    temp = root.right
+                    del root
+                    return temp
+                elif not root.right:
+                    temp = root.left
+                    del root
+                    return temp
+                
+                # has two children: get the inorder successor
+                current = root.right
+                while current.left:
+                    current = current.left
+                root.data = current.data
+                root.right = delete_helper(root.right, current.data)
+            return root
+        delete_helper(self.root, key)
+
+    def size(self):
         pass
-            
+    
+    def max(self):
+        pass
+    
+    def min(self):
+        pass
+
+    # The most important points is, BFS starts visiting nodes from root 
+    # while DFS starts visiting nodes from leaves. 
+    # So if our problem is to search something that is more likely to closer to root, 
+    # we would prefer BFS. And if the target node is close to a leaf, we would prefer DFS.
+    def printAllLeaves(self):
+        pass
+
+    def printKthLevel(self, k):
+        pass
+    
+# Self-balanced BST
 class SelfBalancingBST:
     pass
+
+# Red-Black Tree
 class RBTree(SelfBalancingBST):
     pass
+
+# AVL Tree
 class AVLTree(SelfBalancingBST):
     pass
+
+# Splay Tree
 class SplayTree(SelfBalancingBST):
     pass
 
 # 2-3 search trees
+class TwoThreeSearchTree:
+    pass
 
 # Finger Tree https://zhuanlan.zhihu.com/p/30589105
+class FingerTree:
+    pass
 
+# Segment Tree
 class SegementTreeNode:
     def __init__(self, start, end, value):
         self.start = start

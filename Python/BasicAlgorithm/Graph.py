@@ -1,4 +1,8 @@
-# Graph representations
+"""
+    Graph
+"""
+
+# Graph representations - adjacent list
 class Graph:
     def __init__(self):
         self.graph = {}
@@ -74,7 +78,6 @@ def topological_sort(graph):
             if v not in visited:
                 topo_helper(graph, v, visited, res)
         res.insert(0, u)
-
     visited = set()
     res = []
     for u in graph:
@@ -82,35 +85,21 @@ def topological_sort(graph):
             topo_helper(graph, u, visited, res)
     return res
 
-
+# List of Graph problems:
+#
 # Directed graph: Detect cycle, Topological sort, SCC, Kosaraju-Sharir algorithm
-
 # MST: Prim's algorithm, Kruskal's algorithm
-
 # Shortest paths: Dijkstra's algorithm, Bellman-Ford algorithm, Negative cycle detection
-
 # Netword flow: max flow, min cut
-
 # Cycle detection
-
 # Topological sort
-
 # Minimum spanning tree
-
 # Shortest path algorithm
-
 # Flood-fill algorithm
-
 # Articulation point and bridges
-
 # Biconnected components
-
 # Strongly connected components
-
 # Hamiltonian path
-
 # Maximum path
-
 # Minimum cost maximum flow
-
 # Min-cut

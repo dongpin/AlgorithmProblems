@@ -56,6 +56,14 @@ docs/_build/
 # quansh
 my_algo_env
 
+# temporarily disable this folder. keep this change locally
+CSharp
+Airbnb.py
+Google.py
+Oracle.py
+Pinterest.py
+TestRunner.py
+
 # ###############################
 # c#
 # ###############################
