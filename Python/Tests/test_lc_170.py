@@ -15,8 +15,8 @@ def create_sample_tree():
     root.left.left.right = TreeNode(2)
     return tree
 
-# Test Cases
-def test_height():
+# 173 Test Cases
+def test_bst_iterator():
     tree = create_sample_tree()
     iterator = BstIterator(tree.root)
     res = []
