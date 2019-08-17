@@ -1,7 +1,7 @@
 import unittest
 
 from Python.BasicAlgorithm.Tree import *
-from Python.Problems.BST_Iterator_173 import *
+from Python.Problems.lc173_bst_iterator import *
 
 # Test Helpers
 def create_sample_tree():

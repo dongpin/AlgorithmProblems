@@ -1,6 +1,6 @@
 import unittest
 
-from Python.Problems.DC_ClosestPairs import *
+from Python.BasicAlgorithm.DC_ClosestPairs import *
 
 def test_closest_pair_1D():
     data = [100*random.random() for i in range(10)]
