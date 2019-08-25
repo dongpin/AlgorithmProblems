@@ -24,5 +24,12 @@ namespace Tests.LC
         {
             Assert.AreEqual(3, Algorithm.FindLongestSubStrWithoutRepeatingChars("abcabcbb"));
         }
+
+        [Test]
+        public void LongestPalindromicSubstr()
+        {
+            Assert.AreEqual("aba", Algorithm.FindLongestPalindromicSubstr("babad"));
+            Assert.AreEqual("bb", Algorithm.FindLongestPalindromicSubstr("cbbd"));
+        }
     }
 }

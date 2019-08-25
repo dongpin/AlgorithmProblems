@@ -2,6 +2,7 @@ import unittest
 
 from Python.Problems.lc2_add_two_numbers import *
 from Python.Problems.lc3_longest_substring_without_repeating_chars import *
+from Python.Problems.lc5_longest_palindromic_substr import *
 from Python.Problems.lc32_longest_valid_parentheses import *
 from Python.Problems.lc56_merge_intervals import *
 from Python.Problems.lc44_wildcard_matching import *
@@ -30,6 +31,11 @@ def test_longest_substr_without_repeating_chars():
     assert longest_substring_without_repeating_chars("abcabcbb") == 3
     assert longest_substring_without_repeating_chars("bbbbb") == 1
     assert longest_substring_without_repeating_chars("pwwkew") == 3
+
+# 5
+def test_longest_palindromic_substr():
+    assert longest_palindrome("babad") == "aba"
+    assert longest_palindrome("cbbd") == "bb"
 
 # 32
 
