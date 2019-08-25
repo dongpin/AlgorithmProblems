@@ -7,3 +7,13 @@ matrix:
         - cd Python
       script:
         - python -m unittest discover
+    - language: csharp
+      mono: none
+      dotnet: 2.2.401
+      before_script:
+        - cd CS
+        - dotnet restore
+      script:
+        - dotnet build
+        - dotnet test test\test.csproj
+    
