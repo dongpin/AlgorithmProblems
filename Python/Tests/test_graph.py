@@ -2,6 +2,8 @@ import unittest
 
 from Python.BasicAlgorithm.Graph import *
 
+from collections import OrderedDict
+
 def test_create_graph():
     g = Graph()
     g.add_edge(0, 1)
@@ -16,9 +18,12 @@ test_graph1 = {'A': ['B', 'C'], \
               'K': ['I', 'J'], \
               'J': ['A'], \
               'Z': []}
-test_graph2 = {'A': [], \
-              'B': [], \
-              'C': []}
+
+test_graph2 = OrderedDict()
+test_graph2['A'] = []
+test_graph2['B'] = []
+test_graph2['C'] = []
+
 test_graph3 = {'A': ['B', 'C']}
 test_graph4 = {}
 

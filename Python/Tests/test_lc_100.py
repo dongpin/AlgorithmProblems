@@ -2,6 +2,10 @@ import unittest
 
 from Python.BasicAlgorithm.Tree import *
 from Python.Problems.lc173_bst_iterator import *
+from Python.Problems.lc167_two_sum_II import *
+
+def test_lc167_two_sum_II():
+    assert two_sum([2, 7, 11, 15], 9) == [0, 1]
 
 # Test Helpers
 def create_sample_tree():
@@ -15,7 +19,11 @@ def create_sample_tree():
     root.left.left.right = TreeNode(2)
     return tree
 
-# 173 Test Cases
+# 167
+def test_two_sum_II():
+    assert two_sum([2, 7, 11, 15], 9) == [0, 1]
+
+# 173
 def test_bst_iterator():
     tree = create_sample_tree()
     iterator = BstIterator(tree.root)
