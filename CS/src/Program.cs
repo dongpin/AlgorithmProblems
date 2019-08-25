@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace src
+namespace Src
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Console.WriteLine("Hello World!");
         }
     }
 }
