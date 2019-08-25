@@ -3,8 +3,6 @@ matrix:
     - language: python
       python: 
         - "3.6"
-      before_script:
-        - cd Python
       script:
         - python -m unittest discover
     - language: csharp
