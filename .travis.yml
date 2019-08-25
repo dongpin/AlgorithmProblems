@@ -4,7 +4,7 @@ matrix:
       python: 
         - "3.6"
       script:
-        - python -m unittest discover
+        - pytest
     - language: csharp
       mono: none
       dotnet: 2.2.401
@@ -13,5 +13,5 @@ matrix:
         - dotnet restore
       script:
         - dotnet build
-        - dotnet test test\test.csproj
+        - dotnet test test/test.csproj
     
