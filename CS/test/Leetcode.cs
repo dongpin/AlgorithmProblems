@@ -56,5 +56,20 @@ namespace Tests.LC
             Assert.AreEqual(3, Algorithm.CountNumOfIslands(testGrid2));
 
         }
+
+        [Test]
+        public void FlattenBinaryTree()
+        {
+            var root = new TreeNode(1);
+            root.Left = new TreeNode(2);
+            root.Right = new TreeNode(3);
+
+            Algorithm.FlattenBTtoLL(root);
+            Assert.AreEqual(null, root.Left);
+            Assert.AreEqual(2, root.Right.Val);
+            Assert.AreEqual(null, root.Right.Left);
+            Assert.AreEqual(3, root.Right.Right.Val);
+            Assert.AreEqual(null, root.Right.Right.Left);
+        }
     }
 }
