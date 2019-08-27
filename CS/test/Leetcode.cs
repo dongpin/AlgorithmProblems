@@ -71,5 +71,19 @@ namespace Tests.LC
             Assert.AreEqual(3, root.Right.Right.Val);
             Assert.AreEqual(null, root.Right.Right.Left);
         }
+
+        [Test]
+        public void IsBipartite()
+        {
+            var graph = new int[][]
+            {
+                new int[]{1, 3},
+                new int[]{0, 2},
+                new int[]{1, 3},
+                new int[]{0, 2}
+            };
+
+            Assert.IsTrue(Algorithm.IsBipartite(graph));
+        }
     }
 }
